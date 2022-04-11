@@ -43,5 +43,21 @@ app.get("", (req, res) => {
     }
   );
 });
+app.get("/ip", (req, res) => {
+  exec("/sbin/ip route", (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      res.send("-1");
+      return;
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr}`);
+      res.send("-1");
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    res.send(stdout);
+  });
+});
 const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}..`));

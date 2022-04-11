@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forkapi-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: forkapi
+  template:
+    metadata:
+      labels:
+        app: forapi
+    spec:
+      containers:
+      - name: forkapi
+        image: ajeyaunoff/forkapi:latest
+        ports:
+        - containerPort: 8080
