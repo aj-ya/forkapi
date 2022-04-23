@@ -22,7 +22,7 @@ app.get("/threads/:numThreads", (req, res) => {
       console.error(`child stderr:\n${data}`);
     });
   }
-  res.send(num_threads);
+  res.status(200).end(num_threads);
 });
 app.get("", (req, res) => {
   exec(
@@ -43,21 +43,5 @@ app.get("", (req, res) => {
     }
   );
 });
-app.get("/ip", (req, res) => {
-  exec("/sbin/ip route", (error, stdout, stderr) => {
-    if (error) {
-      console.log(`error: ${error.message}`);
-      res.send("-1");
-      return;
-    }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`);
-      res.send("-1");
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-    res.send(stdout);
-  });
-});
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening on port ${port}..`));
