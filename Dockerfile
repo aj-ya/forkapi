@@ -9,13 +9,13 @@ WORKDIR /app
 # COPY package-lock.json .
 # COPY index.js .
 # RUN npm config set strict-ssl=false
-# RUN npm install
+
 # If you are building your code for production
 # RUN npm ci 
 
 # Bundle app source
 COPY . .
-
+RUN npm install
 EXPOSE 3001
 CMD [ "node","index.js" ]
 #docker build . -t ajeyaunoff/forkapi
